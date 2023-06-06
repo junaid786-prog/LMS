@@ -57,7 +57,7 @@ namespace LMS.DAL
                 foreach (string line in lines)
                 {
                     string[] bookDetails = line.Split(',');
-                    if (bookDetails[1].Equals(query) || bookDetails[2].Equals(query) || bookDetails[4].Equals(query))
+                    if (bookDetails[1].Equals(query))
                     {
                         book = new Book(int.Parse(bookDetails[0]), bookDetails[1], bookDetails[2], int.Parse(bookDetails[3]), bookDetails[4], int.Parse(bookDetails[5]));
                         break;

@@ -45,5 +45,9 @@ namespace LMS.Models
             if (year < 0 || new DateOnly().Year > year) return false;
             return true;
         }
+
+        public void PrintBook(){
+                Console.WriteLine(this.Id + " " + this.Title + " " + this.Author + " " + this.PublicationYear + " " + this.Genre + " " + this.Status);
+        }
     }
 }

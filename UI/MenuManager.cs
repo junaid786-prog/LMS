@@ -12,7 +12,7 @@ namespace LMS.UI
             Console.WriteLine("2. Search Book");
             Console.WriteLine("3. Borrow Book");
             Console.WriteLine("4. Return Book");
-            Console.WriteLine("5. Search Book By Title | author | genre \n");
+            Console.WriteLine("5. Search Book By Title | author | genre");
             Console.WriteLine("6. Exit\n");
         }
 
@@ -72,7 +72,7 @@ namespace LMS.UI
             Console.WriteLine("Id Title Author PublicationYear Genre Status");
             foreach (Book book in books)
             {
-                Console.WriteLine(book.Id + " " + book.Title + " " + book.Author + " " + book.PublicationYear + " " + book.Genre + " " + book.Status);
+                book.PrintBook();
             }
             Console.WriteLine("\n=========END========\n");
         }
@@ -100,7 +100,7 @@ namespace LMS.UI
                     Console.WriteLine("title: " + title);
                     Book targetBook = bookManager.SearchBookByTitle(title) ?? throw new InvalidOperationException("book not found with this title");
                     Console.WriteLine("Id Title Author PublicationYear Genre Status");
-                    Console.WriteLine(targetBook.Id + " " + targetBook.Title + " " + targetBook.Author + " " + targetBook.PublicationYear + " " + targetBook.Genre + " " + targetBook.Status);
+                    targetBook.PrintBook();
                     break;
                 case 3:
                     Console.WriteLine("Borrow Book");
@@ -122,7 +122,7 @@ namespace LMS.UI
                     Console.WriteLine("Id Title Author PublicationYear Genre Status");
                     books.ForEach((b) =>
                     {
-                        Console.WriteLine(b.Id + " " + b.Title + " " + b.Author + " " + b.PublicationYear + " " + b.Genre + " " + b.Status);
+                        b.PrintBook();
                     });
                     break;
                 case 6:

@@ -12,7 +12,8 @@ namespace LMS.UI
             Console.WriteLine("2. Search Book");
             Console.WriteLine("3. Borrow Book");
             Console.WriteLine("4. Return Book");
-            Console.WriteLine("5. Exit\n");
+            Console.WriteLine("5. Search Book By Title | author | genre \n");
+            Console.WriteLine("6. Exit\n");
         }
 
         public int GetChoice()
@@ -79,7 +80,7 @@ namespace LMS.UI
         public void RunOperation(int option)
         {
             BookManager bookManager = new BookManager();
-            if (option < 0 || option > 5)
+            if (option < 0 || option > 6)
             {
                 Console.WriteLine("Invalid choice. Select from 0 to 5");
                 return;
@@ -114,11 +115,22 @@ namespace LMS.UI
                     bookManager.ReturnBook(bookId2);
                     break;
                 case 5:
+                    Console.WriteLine("Enter book title or author or genre: ");
+                    string query = Console.ReadLine() ?? throw new InvalidOperationException("title can not be null");
+                    Console.WriteLine("title: " + query);
+                    List<Book> books = bookManager.SearchBook(query) ?? throw new InvalidOperationException("book not found with this title | author | genre");
+                    Console.WriteLine("Id Title Author PublicationYear Genre Status");
+                    books.ForEach((b) =>
+                    {
+                        Console.WriteLine(b.Id + " " + b.Title + " " + b.Author + " " + b.PublicationYear + " " + b.Genre + " " + b.Status);
+                    });
+                    break;
+                case 6:
                     Console.WriteLine("Exiting...");
                     Environment.Exit(0);
                     break;
                 default:
-                    Console.WriteLine("Invalid choice. Select from 0 to 4");
+                    Console.WriteLine("Invalid choice. Select from 0 to 6");
                     break;
             }
         }

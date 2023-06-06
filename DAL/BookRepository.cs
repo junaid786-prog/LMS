@@ -48,7 +48,7 @@ namespace LMS.DAL
         }
 
         // 3. search book by title
-        public Book? SearchBookByTitle(string title)
+        public Book? SearchBookByTitle(string query)
         {
             Book? book = null;
             try
@@ -57,7 +57,7 @@ namespace LMS.DAL
                 foreach (string line in lines)
                 {
                     string[] bookDetails = line.Split(',');
-                    if (bookDetails[1].Equals(title))
+                    if (bookDetails[1].Equals(query) || bookDetails[2].Equals(query) || bookDetails[4].Equals(query))
                     {
                         book = new Book(int.Parse(bookDetails[0]), bookDetails[1], bookDetails[2], int.Parse(bookDetails[3]), bookDetails[4], int.Parse(bookDetails[5]));
                         break;
@@ -69,6 +69,29 @@ namespace LMS.DAL
                 System.Console.WriteLine(e.Message);
             }
             return book;
+        }
+        public List<Book> SearchBook(string query)
+        {
+            List<Book> books = new List<Book>();
+            Book? book = null;
+            try
+            {
+                string[] lines = File.ReadAllLines(path);
+                foreach (string line in lines)
+                {
+                    string[] bookDetails = line.Split(',');
+                    if (bookDetails[1].Equals(query) || bookDetails[2].Equals(query) || bookDetails[4].Equals(query))
+                    {
+                        book = new Book(int.Parse(bookDetails[0]), bookDetails[1], bookDetails[2], int.Parse(bookDetails[3]), bookDetails[4], int.Parse(bookDetails[5]));
+                        books.Add(book);
+                    }
+                }
+            }
+            catch (IOException e)
+            {
+                System.Console.WriteLine(e.Message);
+            }
+            return books;
         }
 
         // 4. search book by author

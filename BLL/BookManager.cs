@@ -17,6 +17,10 @@ namespace LMS.BLL{
             return bookRepository.SearchBookByTitle(title);
         }
 
+        public List<Book> SearchBook(string title){
+            BookRepository bookRepository = new BookRepository();
+            return bookRepository.SearchBook(title);
+        }
         public void BorrowBook(int id){
             BookRepository bookRepository = new BookRepository();
             bookRepository.BorrowBook(id);
